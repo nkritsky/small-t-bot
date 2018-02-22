@@ -1,3 +1,3 @@
-//small echo bot for Telegram
+#small echo bot for Telegram
 
 print ("Hello world!")
