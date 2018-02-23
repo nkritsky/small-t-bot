@@ -52,7 +52,10 @@ def echo(bot):
         if update.message:  # your bot can receive updates without messages
             # Reply to the message
             update.message.reply_text(update.message.text)
-
+def start(bot, update):
+	"""Greet the user"""
+	bot.send_message(chat_id=update.message.chat_id, text="I'm a bot, please talk to me!")
+	
 
 if __name__ == '__main__':
     main()
