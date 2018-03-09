@@ -37,6 +37,11 @@ def help(bot, update):
     """Send a message when the command /help is issued."""
     update.message.reply_text('Help!')
 
+def fun(bot, update):
+    """Send a message when the command /fun is issued."""
+	bot.send_chat_action(chat_id=chat_id, action=telegram.ChatAction.TYPING)
+	logger.info('User wants some fun in update %s',update)
+    update.message.reply_text('fun function is not implemented yet :(')
 
 def echo(bot, update):
     """Echo the user message."""
@@ -51,7 +56,8 @@ def error(bot, update, error):
 def main():
     """Start the bot."""
     # Create the EventHandler and pass it your bot's token.
-    updater = Updater(os.getenv("BOT_CONFIG_token"))
+    TOKEN = os.getenv("BOT_CONFIG_token")
+	updater = Updater(TOKEN)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
@@ -59,6 +65,7 @@ def main():
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
+    dp.add_handler(CommandHandler("fun", fun))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
