@@ -16,6 +16,7 @@ bot.
 """
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+import telegram
 import logging
 import os
 
@@ -75,7 +76,7 @@ def main():
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("fun", fun))
     dp.add_handler(CommandHandler("about", about))
-    dp.add_handler(CommandHandler("info", about))
+    # dp.add_handler(CommandHandler("info", about))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
