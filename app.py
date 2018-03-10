@@ -57,7 +57,7 @@ def main():
     """Start the bot."""
     # Create the EventHandler and pass it your bot's token.
     TOKEN = os.getenv("BOT_CONFIG_token")
-	updater = Updater(TOKEN)
+    updater = Updater(TOKEN)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
