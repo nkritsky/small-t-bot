@@ -39,8 +39,8 @@ def help(bot, update):
 
 def fun(bot, update):
     """Send a message when the command /fun is issued."""
-	bot.send_chat_action(chat_id=chat_id, action=telegram.ChatAction.TYPING)
-	logger.info('User wants some fun in update %s',update)
+    bot.send_chat_action(chat_id=chat_id, action=telegram.ChatAction.TYPING)
+    logger.info('User wants some fun in update %s',update)
     update.message.reply_text('fun function is not implemented yet :(')
 
 def echo(bot, update):
