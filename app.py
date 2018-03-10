@@ -46,7 +46,7 @@ def fun(bot, update):
     logger.info('User wants some fun in update %s',update)
     update.message.reply_text('fun function is not implemented yet :(')
 
- def about(bot, update):
+def about(bot, update):
     """Information about current instance"""
     update.message.reply_text('version is %s',VERSION)
     update.message.reply_text('running in OpenShift POD %s',os.getenv("MY_POD_NAME"))
