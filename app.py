@@ -16,7 +16,7 @@ bot.
 """
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-import telegram
+from telegram import ChatAction
 import logging
 import os
 
@@ -35,7 +35,6 @@ def start(bot, update):
     """Send a message when the command /start is issued."""
     update.message.reply_text("I'm a bot, please talk to me!")
 
-
 def help(bot, update):
     """Send a message when the command /help is issued."""
     update.message.reply_text('Help!')
@@ -49,6 +48,7 @@ def fun(bot, update):
 
 def about(bot, update):
     """Information about current instance"""
+    logger.info('User wants some info in update %s',update)
     update.message.reply_text('version is %s',VERSION)
     update.message.reply_text('running in OpenShift POD %s',os.getenv("MY_POD_NAME"))
 
