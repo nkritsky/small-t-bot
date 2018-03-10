@@ -25,6 +25,8 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
+#define version number
+VERSION = os.getenv("OPENSHIFT_BUILD_NAME")
 
 # Define a few command handlers. These usually take the two arguments bot and
 # update. Error handlers also receive the raised TelegramError object in error.
@@ -39,10 +41,15 @@ def help(bot, update):
 
 def fun(bot, update):
     """Send a message when the command /fun is issued."""
-    chat_id = bot.get_updates()[-1].message.chat_id
+    chat_id = update.message.chat_id
     bot.send_chat_action(chat_id=chat_id, action=telegram.ChatAction.TYPING)
     logger.info('User wants some fun in update %s',update)
     update.message.reply_text('fun function is not implemented yet :(')
+
+ def about(bot, update):
+    """Information about current instance"""
+    update.message.reply_text('version is %s',VERSION)
+    update.message.reply_text('running in OpenShift POD %s',os.getenv("MY_POD_NAME"))
 
 def echo(bot, update):
     """Echo the user message."""
@@ -67,6 +74,8 @@ def main():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("fun", fun))
+    dp.add_handler(CommandHandler("about", about))
+    dp.add_handler(CommandHandler("info", about))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
