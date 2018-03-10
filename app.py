@@ -22,7 +22,7 @@ import os
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.DEBUG)
+                    level=logging.INFO)
 
 logger = logging.getLogger(__name__)
 
@@ -43,13 +43,13 @@ def fun(bot, update):
     """Send a message when the command /fun is issued."""
     chat_id = update.message.chat_id
     #bot.send_chat_action(chat_id=chat_id, action=telegram.ChatAction.TYPING)
-    logger.debug('User wants some fun in update %s',update)
+    logger.info('User wants some fun in update %s',update)
     update.message.reply_text('fun function is not implemented yet :(')
 
 def about(bot, update):
     """Information about current instance"""
-    logger.debug('User wants some info in update %s',update)
-    update.message.reply_text('version is '+VERSION)
+    logger.info('User wants some info in update %s',update)
+    update.message.reply_text('build version is '+VERSION)
     update.message.reply_text('running in OpenShift POD '+os.getenv("MY_POD_NAME"))
 
 def echo(bot, update):
