@@ -26,8 +26,9 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
-#define version number
+#some useful constants
 VERSION = os.getenv("OPENSHIFT_BUILD_NAME")
+SOURCE = os.getenv("OPENSHIFT_BUILD_SOURCE")
 
 # Define a few command handlers. These usually take the two arguments bot and
 # update. Error handlers also receive the raised TelegramError object in error.
@@ -51,6 +52,7 @@ def about(bot, update):
     logger.info('User wants some info in update %s',update)
     update.message.reply_text('build version is '+VERSION)
     update.message.reply_text('running in OpenShift POD '+os.getenv("MY_POD_NAME"))
+    update.message.reply_text('built from '+SOURCE)
 
 def echo(bot, update):
     """Echo the user message."""
