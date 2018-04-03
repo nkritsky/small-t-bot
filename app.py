@@ -51,7 +51,7 @@ def about(bot, update):
     """Information about current instance"""
     logger.info('User wants some info in update %s',update)
     update.message.reply_text('build version is '+VERSION)
-    update.message.reply_text('running in OpenShift POD '+os.getenv("MY_POD_NAME"))
+    update.message.reply_text('running in OpenShift POD '+os.getenv("HOSTNAME"))
     update.message.reply_text('built from '+SOURCE)
 
 def echo(bot, update):
