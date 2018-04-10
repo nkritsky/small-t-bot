@@ -67,7 +67,8 @@ def error(bot, update, error):
 def main():
     """Start the bot."""
     # Create the EventHandler and pass it your bot's token.
-    TOKEN = os.getenv("BOT_CONFIG_token")
+    if "BOT_CONFIG_token" in os.environ: TOKEN = os.environ.get("BOT_CONFIG_token")
+    else: print ("Please set environment variable BOT_CONFIG_token to contain the Telegram bot token.\nexiting...");exit(255)
     updater = Updater(TOKEN)
 
     # Get the dispatcher to register handlers
@@ -87,12 +88,20 @@ def main():
     dp.add_error_handler(error)
 
     # Start the Bot
-    updater.start_polling()
-
-    # Run the bot until you press Ctrl-C or the process receives SIGINT,
-    # SIGTERM or SIGABRT. This should be used most of the time, since
-    # start_polling() is non-blocking and will stop the bot gracefully.
-    updater.idle()
+    # if the environment variable BOT_CONFIG_service_url - register the webhook
+    if "BOT_CONFIG_service_url" in os.environ:
+        my_webhook_url=os.environ.get("BOT_CONFIG_service_url")
+        updater.start_webhook(listen='0.0.0.0',
+                      port=8080,
+                      url_path=TOKEN)
+        #print('setting webhook to: '+my_webhook_url+'/'+TOKEN)
+        updater.bot.set_webhook(webhook_url=my_webhook_url+'/'+TOKEN)
+    else:
+        updater.start_polling()
+        # Run the bot until you press Ctrl-C or the process receives SIGINT,
+        # SIGTERM or SIGABRT. This should be used most of the time, since
+        # start_polling() is non-blocking and will stop the bot gracefully.
+        updater.idle()
 
 
 if __name__ == '__main__':
